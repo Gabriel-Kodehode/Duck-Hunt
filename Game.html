@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Duck Hunt</title>
+    <link rel="stylesheet" href="./Game.css" />
+  </head>
+  <body>
+    <div id="StartScreen">
+      <img src="./Image/DuckGameLogo.png" alt="" />
+      <button id="PlayButton" onclick="Play()">~Play</button>
+    </div>
+    <div id="game-area">
+      <img src="Image/Bush.png" alt="" id="Bush" />
+      <img src="Image/Tree.png" alt="" id="Tree" />
+      <div id="duck"></div>
+      <div id="Dog"></div>
+    </div>
+    <div id="image-container"></div>
+    <div id="container">
+      <div id="Ammo">SHOT <br /></div>
+      <div id="Hit"></div>
+      <p id="score-display">
+        0 <br />
+        Score
+      </p>
+    </div>
+    <script src="./Game.js"></script>
+  </body>
+</html>
