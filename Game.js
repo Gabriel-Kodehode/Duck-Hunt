@@ -23,6 +23,7 @@ function initializeDuck() {
   duck.style.left = `${randomX}px`;
   duck.style.bottom = `0px`; // Set the duck to the bottom of the game area
   duck.style.backgroundImage = "url(./Image/Duck.webp)";
+  Fly();
 }
 
 // Function to animate the duck upwards
@@ -74,6 +75,27 @@ function moveDuckUp() {
   }, 20); // Update every 20ms
 }
 
+function Fly() {
+  if (struk === false) {
+    duck.style.backgroundImage = "url(./Image/Duck.webp)";
+    setTimeout(Float, 150);
+  }
+}
+
+function Float() {
+  if (struk === false) {
+    duck.style.backgroundImage = "url(./Image/DuckGlide.png)";
+    setTimeout(Glide, 150);
+  }
+}
+
+function Glide() {
+  if (struk === false) {
+    duck.style.backgroundImage = "url(./Image/DuckFly.png)";
+    setTimeout(Fly, 150);
+  }
+}
+
 function moveDuckDown() {
   duck.style.backgroundImage = "url(./Image/DuckFall.png)";
   moveInterval = setInterval(() => {
@@ -84,6 +106,15 @@ function moveDuckDown() {
       reload();
       initializeDuck();
       moveDuckUp();
+      if (count === 5) {
+        count = 0;
+
+        if (lifeCount !== 15) {
+          lifeCount++;
+          up = true;
+          Laugh();
+        }
+      }
     }
   }, 20); // Update every 20ms
 }
@@ -91,15 +122,17 @@ function moveDuckDown() {
 // Function to update the score
 function increaseScore() {
   count++;
-  if (count === 5) {
-    count = 0;
+  console.log(count);
 
-    if (lifeCount !== 15) {
-      lifeCount++;
-      up = true;
-      Laugh();
-    }
-  }
+  // if (count === 5) {
+  //   count = 0;
+
+  //   if (lifeCount !== 15) {
+  //     lifeCount++;
+  //     up = true;
+  //     Laugh();
+  //   }
+  // }
   setTimeout(moveDuckDown, 500);
   // initializeDuck(); // Reinitialize position at the bottom
   // moveDuckUp();
@@ -119,14 +152,14 @@ function Laugh() {
   id = setInterval(frame, 10);
   Dog.style.left = `${Math.random() * (gameArea.clientWidth - 60)}px`;
   function frame() {
-    if ((pos !== 60) & (up === true)) {
+    if ((pos !== 50) & (up === true)) {
       pos++;
       Dog.style.bottom = pos + "px";
-    } else if ((up === false) & (pos !== 0)) {
+    } else if ((up === false) & (pos !== -20)) {
       pos--;
       Dog.style.bottom = pos + "px";
     }
-    if (pos == 60) {
+    if (pos == 50) {
       up = false;
     }
   }
