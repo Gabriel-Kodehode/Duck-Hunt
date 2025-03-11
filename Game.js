@@ -53,6 +53,8 @@ function moveDuckUp() {
       function changeImage() {
         let img = document.getElementById("dynamicImage"); // Get the image by ID
         if (img) {
+          const audio = new Audio("sounds/DogLaugh.mp3");
+          audio.play();
           img.id = "RedDuckImage";
           img.src = "./Image/RedDuck.png";
         } else {
@@ -151,6 +153,9 @@ function Laugh() {
   clearInterval(id);
   id = setInterval(frame, 10);
   Dog.style.left = `${Math.random() * (gameArea.clientWidth - 60)}px`;
+  const audio = new Audio("sounds/Dog.mp3");
+  audio.volume = 0.3;
+  audio.play();
   function frame() {
     if ((pos !== 50) & (up === true)) {
       pos++;
@@ -213,7 +218,10 @@ duck.addEventListener("click", () => {
 gameArea.addEventListener("click", () => {
   const imgToRemove = document.getElementById("Bullets");
   if (imgToRemove) {
+    const Zapper = new Audio("sounds/Zapper.mp3");
+    Zapper.play();
     imgToRemove.remove();
+    console.log("music");
     rounds--;
     console.log(rounds);
   }
@@ -226,8 +234,12 @@ for (let i = 0; i < 20; i++) {
   container.appendChild(img);
 }
 
+const Theme = new Audio("sounds/Retro Beyond.mp3");
+
 function Play() {
   // Initialize the game on start
+  Theme.play();
+  Theme.volume = 0.3;
   moveDuckUp(); // Start the upward movement after initialization
   StartScreen.style.display = "none";
   failed = 0;
@@ -240,6 +252,10 @@ function Play() {
 }
 
 function Fail() {
+  Theme.pause();
+  Theme.currentTime = 0;
+  const audio = new Audio("sounds/DogLaugh.mp3");
+  audio.play();
   StartScreen.style.display = "";
   movingUp = false;
   failed = 1;
