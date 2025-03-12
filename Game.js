@@ -219,6 +219,7 @@ gameArea.addEventListener("click", () => {
   const imgToRemove = document.getElementById("Bullets");
   if (imgToRemove) {
     const Zapper = new Audio("sounds/Zapper.mp3");
+    Zapper.currentTime = 0.5;
     Zapper.play();
     imgToRemove.remove();
     console.log("music");
