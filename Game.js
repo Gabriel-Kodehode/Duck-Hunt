@@ -235,7 +235,8 @@ for (let i = 0; i < 20; i++) {
   container.appendChild(img);
 }
 
-const Theme = new Audio("sounds/Retro Beyond.mp3");
+// const Theme = new Audio("sounds/Retro Beyond.mp3");
+const Theme = new Audio("sounds/Electric Toothbrush.mp3");
 
 function Play() {
   // Initialize the game on start
