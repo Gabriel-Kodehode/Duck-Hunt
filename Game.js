@@ -4,17 +4,17 @@ const Dog = document.getElementById("Dog");
 const gameArea = document.getElementById("game-area");
 const scoreDisplay = document.getElementById("score-display");
 
-let score = 0;
+let score = 0; // how many points the player have
 let movingUp = false; // Flag to track whether the duck is moving
 let moveInterval = null; // Interval for duck's upward movement
 let bottomPosition = 0; // Start at the bottom
-let struk = false;
-let id = null;
-let up = true;
-let rounds = 0;
-let count = 0;
-let lifeCount = 0;
-let failed = 0;
+let struk = false; // Checks if the duck is hit or not
+let id = null; // dont remember what this does but the code needs it
+let up = true; // check if the duck is moving up or not
+let rounds = 0; // Ammunition (DO NOT CHANGE)
+let count = 0; // counter to keep track of when dog is gona give extra life (DO NOT CHANGE)
+let lifeCount = 0; // How many life the player haves
+let failed = 0; // A fail state
 
 // Set initial position of the duck at the bottom
 function initializeDuck() {
@@ -50,6 +50,7 @@ function moveDuckUp() {
         score = 0;
       }
 
+      // changes white ducks to red to show lost life
       function changeImage() {
         let img = document.getElementById("dynamicImage"); // Get the image by ID
         if (img) {
@@ -77,6 +78,7 @@ function moveDuckUp() {
   }, 20); // Update every 20ms
 }
 
+// Functions to make it animated
 function Fly() {
   if (struk === false) {
     duck.style.backgroundImage = "url(./Image/Duck.webp)";
@@ -98,6 +100,7 @@ function Glide() {
   }
 }
 
+// Moves the duck down when its hit and adds lives
 function moveDuckDown() {
   duck.style.backgroundImage = "url(./Image/DuckFall.png)";
   moveInterval = setInterval(() => {
@@ -108,9 +111,12 @@ function moveDuckDown() {
       reload();
       initializeDuck();
       moveDuckUp();
+
+      // counter that add extra life when it reaches 5
       if (count === 5) {
         count = 0;
 
+        // stops the player from gaining more than 15 lives
         if (lifeCount !== 15) {
           lifeCount++;
           up = true;
@@ -125,21 +131,10 @@ function moveDuckDown() {
 function increaseScore() {
   count++;
   console.log(count);
-
-  // if (count === 5) {
-  //   count = 0;
-
-  //   if (lifeCount !== 15) {
-  //     lifeCount++;
-  //     up = true;
-  //     Laugh();
-  //   }
-  // }
   setTimeout(moveDuckDown, 500);
-  // initializeDuck(); // Reinitialize position at the bottom
-  // moveDuckUp();
 }
 
+// Adds lives
 function Laugh() {
   const Life = document.getElementById("Hit");
   for (let i = 0; i < 1; i++) {
@@ -149,6 +144,7 @@ function Laugh() {
     Life.appendChild(img);
   }
 
+  // animates dog
   let pos = 0;
   clearInterval(id);
   id = setInterval(frame, 10);
@@ -170,6 +166,7 @@ function Laugh() {
   }
 }
 
+// sets up where the ammo is gona be displayed
 const shots = document.getElementById("Ammo");
 for (let i = 0; i < 3; i++) {
   let img = document.createElement("img");
@@ -179,6 +176,7 @@ for (let i = 0; i < 3; i++) {
   shots.appendChild(img);
 }
 
+//Reloads the gun up to three bullets
 function reload() {
   if (rounds < 3) {
     rounds++;
@@ -203,18 +201,10 @@ duck.addEventListener("click", () => {
       clearInterval(moveInterval);
     }
     setTimeout(increaseScore, 500);
-
-    // increaseScore(); // Increment the score on click
-    // Start the upward movement if the duck isn't already moving
   }
-
-  // Laugh();
-  // up = true;
-  // if (!movingUp) {
-  //   moveDuckUp();
-  // }
 });
 
+// adds eventlistener to make it able to miss fire
 gameArea.addEventListener("click", () => {
   const imgToRemove = document.getElementById("Bullets");
   if (imgToRemove) {
@@ -228,6 +218,7 @@ gameArea.addEventListener("click", () => {
   }
 });
 
+// adds grass
 const container = document.getElementById("image-container");
 for (let i = 0; i < 20; i++) {
   let img = document.createElement("img");
@@ -235,14 +226,14 @@ for (let i = 0; i < 20; i++) {
   container.appendChild(img);
 }
 
-// const Theme = new Audio("sounds/Retro Beyond.mp3");
-const Theme = new Audio("sounds/Electric Toothbrush.mp3");
+// background music
+const Theme = new Audio("sounds/Retro Beyond.mp3");
 
+// what happens when the Play button is pushed
 function Play() {
-  // Initialize the game on start
   Theme.play();
   Theme.volume = 0.3;
-  moveDuckUp(); // Start the upward movement after initialization
+  moveDuckUp();
   StartScreen.style.display = "none";
   failed = 0;
   score = 0;
@@ -253,6 +244,7 @@ function Play() {
   scoreDisplay.innerHTML = `${score} <br> Score`;
 }
 
+// What heppens when the player failes
 function Fail() {
   Theme.pause();
   Theme.currentTime = 0;
