@@ -227,7 +227,7 @@ for (let i = 0; i < 20; i++) {
 }
 
 // background music
-const Theme = new Audio("sounds/Funky Fowl Frenzy.mp3");
+const Theme = new Audio("sounds/Retro Beyond.mp3");
 
 // what happens when the Play button is pushed
 function Play() {
